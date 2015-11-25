@@ -9,5 +9,9 @@
     - include: tasks/apache.yml
     - include: tasks/mysql.yml
     - include: tasks/php.yml
+  handlers:
+    # Now we run service module to reload apache
+    - name: reload apache
+      service: name=apache2 state=reloaded
 
 # 'vagrant provision' may be ran to apply only needed changes
