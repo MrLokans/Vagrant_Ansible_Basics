@@ -3,15 +3,19 @@
   sudo: true
   vars:
     document_root: /vagrant
-  tasks:
-    - name: update apt cache
-      apt: update_cache=yes
-    - include: tasks/apache.yml
-    - include: tasks/mysql.yml
-    - include: tasks/php.yml
+
   handlers:
     # Now we run service module to reload apache
     - name: reload apache
       service: name=apache2 state=reloaded
+
+  pre_tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+
+  # Note that roles are run before Tasks
+  roles:
+    - webserver
+    - database
 
 # 'vagrant provision' may be ran to apply only needed changes
