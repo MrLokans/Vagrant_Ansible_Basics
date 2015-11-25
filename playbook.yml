@@ -4,11 +4,6 @@
   vars:
     document_root: /vagrant
 
-  handlers:
-    # Now we run service module to reload apache
-    - name: reload apache
-      service: name=apache2 state=reloaded
-
   pre_tasks:
     - name: update apt cache
       apt: update_cache=yes
@@ -18,4 +13,4 @@
     - webserver
     - database
 
-# 'vagrant provision' may be ran to apply only needed changes
+# 'vagrant provision' may be run to apply only needed changes
